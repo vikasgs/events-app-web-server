@@ -6,6 +6,9 @@
             <th>Description</th>
             <th>Location</th>
             <th>Date</th>
+            <th>Likes</th>
+            <th>DisLikes</th>
+
         </tr>
         </thead>
         <tbody>
@@ -15,6 +18,8 @@
                 <td>{{ description }}</td>
                 <td>{{ location }}</td>
                 <td>{{ date }}</td>
+                <td>{{ likes }}&nbsp;<button value="{{id}}" class="like-button">Like</button></td>
+                <td>{{ dislikes }}&nbsp;<button value="{{id}}" class="dislike-button">DisLike</button></td>
             </tr>
         {{/events}}
         </tbody>
@@ -30,7 +35,7 @@
                 <label for="title">Title:</label>
             </div>
             <div>
-                <input id="title" name="title" type="text" placeholder="Event Title"/>
+                <input id="title" name="title" type="text" placeholder="Enter Event Title"/>
             </div>
         </div>
         <div>
@@ -38,7 +43,23 @@
                 <label for="description">Description:</label>
             </div>
             <div>
-                <input id="description" name="description" type="text" placeholder="Event Description"/>
+                <input id="description" name="description" type="text" placeholder="Enter Description"/>
+            </div>
+        </div>
+                <div>
+            <div>
+                <label for="location">Location:</label>
+            </div>
+            <div>
+                <input id="location" name="location" type="text" placeholder="Event Location"/>
+            </div>
+        </div>
+        <div class="input-group.date">
+            <div>
+                <label for="event-date">Event Date:</label>
+            </div>
+            <div>
+                <input id="event-date" name="date" type="text" placeholder="Event Date"/>
             </div>
         </div>
         <div>
@@ -46,5 +67,11 @@
         </div>
     </form>
 </div>
+
+<script>
+    $('.like-button').on('click', (event => {$.post(`/event/like/${event.target.value}`, () => {location.reload()})}));
+    $('.dislike-button').on('click', (event => {$.post(`/event/dislike/${event.target.value}`, () => {location.reload()})}));
+    $('#event-date').datepicker();
+</script>
 
 
